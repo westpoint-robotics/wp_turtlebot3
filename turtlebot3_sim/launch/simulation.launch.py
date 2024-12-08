@@ -117,16 +117,17 @@ def generate_launch_description():
         'headless', default_value='False', description='Whether to execute gzclient)'
     )
 
-    # declare_world_cmd = DeclareLaunchArgument(
-    #     'world',
-    #     default_value=os.path.join(sim_dir, 'worlds', 'warehouse.sdf'),
-    #     description='Full path to world model file to load',
-    # )
-
     declare_world_cmd = DeclareLaunchArgument(
-        name='world',
-        default_value=world_path,
-        description='Full path to the world model file to load')
+        'world',
+        default_value=os.path.join(sim_dir, 'worlds', 'warehouse.sdf'),
+        description='Full path to world model file to load',
+    )
+
+    # declare_world_cmd = DeclareLaunchArgument(
+    #     name='world',
+    #     default_value=world_path,
+    #     description='Full path to the world model file to load',
+    # )
    
 
     declare_robot_name_cmd = DeclareLaunchArgument(
@@ -179,8 +180,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('ros_gz_sim'), 'launch',
                          'gz_sim.launch.py')),
-        #launch_arguments={'gz_args': ['-r -s ', world_sdf]}.items(),
-        launch_arguments={'gz_args': ['-r -s ', 'turtlebot3_house.world']}.items(),
+        launch_arguments={'gz_args': ['-r -s ', world_sdf]}.items(),
+        #launch_arguments={'gz_args': ['-r -s ', 'turtlebot3_house.world']}.items(),
         condition=IfCondition(use_simulator))
 
     remove_temp_sdf_file = RegisterEventHandler(event_handler=OnShutdown(
