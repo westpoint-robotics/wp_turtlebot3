@@ -1,8 +1,8 @@
-<sdf version='1.4'>
+<sdf version='1.7'>
   <world name='default'>
 
     <!-- A global light source -->
-    <light type="directional" name="sun">
+    <!-- <light type="directional" name="sun">
       <cast_shadows>false</cast_shadows>
       <pose>0 0 10 0 0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
@@ -14,7 +14,10 @@
         <quadratic>0.001</quadratic>
       </attenuation>
       <direction>-0.5 0.1 -0.9</direction>
-    </light>
+    </light> -->
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
 
     <!-- A ground plane -->
     <model name="ground_plane">
@@ -35,17 +38,26 @@
               <size>100 100</size>
             </plane>
           </geometry>
-          <material>
+          <!-- <material>
             <ambient>0.8 0.8 0.8 1</ambient>
             <diffuse>0.8 0.8 0.8 1</diffuse>
             <specular>0.8 0.8 0.8 1</specular>
+          </material> -->
+          <material>
+            <pbr>
+              <metal>
+                <albedo_map>Wood_Floor_Dark.jpg</albedo_map>
+              </metal>
+            </pbr>
           </material>
+
+
         </visual>
       </link>
     </model>
 
-
-    <physics type="ode">
+    <!-- ==== Using Physics settings from warehouse.sdf instead ===== -->
+    <!-- <physics type="ode">
       <real_time_update_rate>1000.0</real_time_update_rate>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -64,14 +76,9 @@
           <contact_surface_layer>0.01000</contact_surface_layer>
         </constraints>
       </ode>
-    </physics>
+    </physics> -->
 
-    <!-- A turtlebot symbol -->
-    <include>
-      <uri>model://turtlebot3_house</uri>
-    </include>
-
-    <scene>
+    <!-- <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
       <shadows>true</shadows>
@@ -82,6 +89,65 @@
         <pose>0.0 0.0 17.0 0 1.5708 0</pose>
         <view_controller>orbit</view_controller>
       </camera>
-    </gui>
+    </gui> -->
+
+    <!-- VVVVV Below are settings from warehouse.sdf VVVVV-->
+    <physics name="1ms" type="ode">
+      <max_step_size>0.003</max_step_size>
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin
+      filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+
+    <scene>
+      <ambient>1 1 1 1</ambient>
+      <background>0.3 0.7 0.9 1</background>
+      <shadows>0</shadows>
+      <grid>false</grid>
+    </scene>
+
+    <!-- <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0.0 0.0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+        </collision>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+    </model> -->
+
+
+    <!-- A turtlebot symbol -->
+    <include>
+      <uri>model://turtlebot3_house</uri>
+    </include>
+
+
   </world>
 </sdf>

@@ -449,18 +449,6 @@
       </link>
       <link name='Wall_16'>
         <pose frame=''>0.943396 0.183669 0 0 -0 1.5708</pose>
-        <inertial>
-          <inertia>
-            <ixx>nan</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>nan</iyy>
-            <iyz>0</iyz>
-            <izz>nan</izz>
-          </inertia>
-          <mass>0</mass>
-          <pose frame=''>0 0 0 0 -0 0</pose>
-        </inertial>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
         <visual name='Wall_16_Visual'>

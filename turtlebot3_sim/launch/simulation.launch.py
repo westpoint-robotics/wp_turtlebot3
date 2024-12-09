@@ -45,16 +45,18 @@ def generate_launch_description():
     desc_dir = get_package_share_directory('turtlebot3_description')
     launch_dir = os.path.join(sim_dir, 'launch')
     print(f'\n\tsim_dirs: {sim_dir}\n\tdesc_dir: {desc_dir}\n\tlaunch_dir: {launch_dir}')
-    print(f'MODELS PATH: {os.path.join(sim_dir, 'models')}')
+    print(f'\tmodels path: {os.path.join(sim_dir, 'models')}\n')
     world_file_name = 'turtlebot3_house.world'
     world_path = os.path.join(sim_dir, 'worlds', world_file_name)
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
     use_sim_time = LaunchConfiguration('use_sim_time')
+    joy_config = 'xbox'
 
     # Launch configuration variables specific to simulation
     rviz_config_file = LaunchConfiguration('rviz_config_file')
     use_rviz = LaunchConfiguration('use_rviz')
+    use_joy = LaunchConfiguration('use_joy')
     use_simulator = LaunchConfiguration('use_simulator')
     use_robot_state_pub = LaunchConfiguration('use_robot_state_pub')
     headless = LaunchConfiguration('headless')
@@ -101,6 +103,12 @@ def generate_launch_description():
         description='Whether to start rviz',
     )
 
+    declare_use_joy_cmd = DeclareLaunchArgument(
+        'use_joy',
+        default_value='True',
+        description='Whether to start joystick control nodes',
+    )
+
     declare_use_simulator_cmd = DeclareLaunchArgument(
         'use_simulator',
         default_value='True',
@@ -119,7 +127,7 @@ def generate_launch_description():
 
     declare_world_cmd = DeclareLaunchArgument(
         'world',
-        default_value=os.path.join(sim_dir, 'worlds', 'warehouse.sdf'),
+        default_value=os.path.join(sim_dir, 'worlds', 'depot.sdf'),
         description='Full path to world model file to load',
     )
 
@@ -128,7 +136,6 @@ def generate_launch_description():
     #     default_value=world_path,
     #     description='Full path to the world model file to load',
     # )
-   
 
     declare_robot_name_cmd = DeclareLaunchArgument(
         'robot_name', default_value='nav2_turtlebot3', description='name of the robot'
@@ -167,6 +174,7 @@ def generate_launch_description():
             ('/tf_static', 'tf_static')
         ],
     )
+
 
     # The SDF file for the world is a xacro file because we wanted to
     # conditionally load the SceneBroadcaster plugin based on wheter we're
@@ -208,7 +216,19 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression([use_simulator, ' and not ', headless])),
         launch_arguments={'gz_args': ['-v4 -g ']}.items(),
     )
-
+    
+    joystick_control = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory('teleop_twist_joy'),
+                         'launch',
+                         'teleop-launch.py')
+        ),
+        condition=IfCondition(use_joy),
+        launch_arguments={'joy_config': joy_config,
+                          'joy_dev': '0',
+                          'enable_button': '4'}.items())
+                          # enable_button not working above here
+    
     gz_robot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(launch_dir, 'spawn_tb3.launch.py')),
@@ -233,6 +253,7 @@ def generate_launch_description():
 
     ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_rviz_cmd)
+    ld.add_action(declare_use_joy_cmd)
     ld.add_action(declare_use_simulator_cmd)
     ld.add_action(declare_use_robot_state_pub_cmd)
     ld.add_action(declare_simulator_cmd)
@@ -248,6 +269,7 @@ def generate_launch_description():
     ld.add_action(gz_robot)
     ld.add_action(gazebo_server)
     ld.add_action(gazebo_client)
+    ld.add_action(joystick_control)
 
     # Add the actions to launch all of the navigation nodes
     ld.add_action(start_robot_state_publisher_cmd)
