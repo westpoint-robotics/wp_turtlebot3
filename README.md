@@ -1,4 +1,17 @@
-# TurtleBot3
+# TurtleBot3 - Modified by WP Robotics
+
+## West Point Robotics modifications were made to use this for course work
+- Modified to work with Ubuntu 24.04, ROS2 Jazzy, and Gazebo Harmonic 
+- Not all packages are updated and no gaurantee on if they will work.
+- Desired end-state was NAV2 working with Turtlebot3 in this environment.
+- Some short cuts were taken, for example moving of models, and other files to the modified turtlebot3_sim package.
+- This is a "WORK IN PROGRESS"
+
+
+***
+***
+
+## Below here is the original README
 <img src="https://github.com/ROBOTIS-GIT/emanual/blob/master/assets/images/platform/turtlebot3/logo_turtlebot3.png" width="300">
 
 - Active Branches: noetic, humble, main

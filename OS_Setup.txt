@@ -1,0 +1,110 @@
+# These are the commands used to get wp_turtlebot3 working on clean install of Ubuntu 24.04
+# This was tested on a laptop install and Virtual Machines.
+# This could be modified into a script if mass installing is desired.
+
+sudo apt-get upgate;sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y; sudo apt-get autoremove
+sudo adduser ${USER} dialout
+
+# Rebooted
+# Extended terminal history by order of magnitude
+# Allowed infinite scroll in terminal
+
+# Install ROS Jazzy ===================================
+locale  # check for UTF-8
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+locale  # verify settings
+
+sudo apt install software-properties-common 
+sudo add-apt-repository universe
+
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+sudo apt update && sudo apt install ros-dev-tools -y
+sudo apt update;sudo apt upgrade;sudo apt install ros-jazzy-desktop -y
+
+echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+source /opt/ros/jazzy/setup.bash
+
+# Install VS Code and other tools ===================================
+sudo apt update;sudo apt install wget gpg apt-transport-https plocate terminator -y
+
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+rm packages.microsoft.gpg
+
+sudo apt-get update; sudo apt install code -y
+
+# Setup Gazebo Harmonic ===================================
+sudo apt-get update; sudo apt-get install curl lsb-release gnupg -y
+
+sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+sudo apt-get update
+sudo apt-get install gz-harmonic -y
+
+#test gz install
+gz sim shapes.sdf
+# This did not work in Virtual Machine. To fix:
+	1. Shutdown the VM
+	2. Open Virtual Machine Settings
+	3. Select Hardware Tab
+	4. Select Display Device
+	5. Uncheck "3D graphics"|"Accelerate 3d graphics"
+	6. Restart the VM and test GZ again.
+
+# install ros gz ===================================
+sudo apt-get install ros-${ROS_DISTRO}-ros-gz
+
+
+# enable OpenCR hardware access ===================================
+wget https://raw.githubusercontent.com/ROBOTIS-GIT/OpenCR/master/99-opencr-cdc.rules
+sudo cp ./99-opencr-cdc.rules /etc/udev/rules.d/
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+reboot
+
+# install ros dynamixel ===================================
+sudo apt-get install ros-jazzy-dynamixel-sdk*
+
+# Install and Build turtlebot3 packages ===================================
+echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
+mkdir -p ~/ros2_ws/src/
+cd ~/ros2_ws/src/
+git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone -b wp_jazzy_harmonic git@github.com:westpoint-robotics/wp_turtlebot3.git
+
+# These are some of the originals. Dont use these. I should have forked them and done pull requests.
+# git clone -b ros2 https://github.com/ROBOTIS-GIT/turtlebot3.git
+# git clone -b ros2 https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+
+sudo rosdep init
+rosdep update
+cd ~/ros2_ws;rosdep install --from-paths src -y --ignore-src
+
+cd ~/ros2_ws && colcon build --symlink-install
+
+# Test the robot
+ros2 launch turtlebot3_sim simulation.launch.py
+
+
+
+
+
+
+# Other notes
+
+export GZ_SIM_RESOURCE_PATH=/home/${USER}/ros2_ws/install/turtlebot3_description/share:$GZ_SIM_RESOURCE_PATH
+export GZ_SIM_RESOURCE_PATH=/home/${USER}/ros2_ws/install/turtlebot3_sim/share/turtlebot3_sim/models:GZ_SIM_RESOURCE_PATH
+
+
+
+
+
