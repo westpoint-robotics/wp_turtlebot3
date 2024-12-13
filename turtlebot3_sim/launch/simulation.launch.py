@@ -46,7 +46,8 @@ def generate_launch_description():
     launch_dir = os.path.join(sim_dir, 'launch')
     print(f'\n\tsim_dirs: {sim_dir}\n\tdesc_dir: {desc_dir}\n\tlaunch_dir: {launch_dir}')
     print(f'\tmodels path: {os.path.join(sim_dir, 'models')}\n')
-    world_file_name = 'turtlebot3_house.world'
+    #world_file_name = 'turtlebot3_house.world'
+    world_file_name = 'turtlebot3_world.world'
     world_path = os.path.join(sim_dir, 'worlds', world_file_name)
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
@@ -99,7 +100,7 @@ def generate_launch_description():
 
     declare_use_rviz_cmd = DeclareLaunchArgument(
         'use_rviz',
-        default_value='True',
+        default_value='False',
         description='Whether to start rviz',
     )
 
@@ -125,17 +126,17 @@ def generate_launch_description():
         'headless', default_value='False', description='Whether to execute gzclient)'
     )
 
-    declare_world_cmd = DeclareLaunchArgument(
-        'world',
-        default_value=os.path.join(sim_dir, 'worlds', 'depot.sdf'),
-        description='Full path to world model file to load',
-    )
-
     # declare_world_cmd = DeclareLaunchArgument(
-    #     name='world',
-    #     default_value=world_path,
-    #     description='Full path to the world model file to load',
+    #     'world',
+    #     default_value=os.path.join(sim_dir, 'worlds', 'depot.sdf'),
+    #     description='Full path to world model file to load',
     # )
+
+    declare_world_cmd = DeclareLaunchArgument(
+        name='world',
+        default_value=world_path,
+        description='Full path to the world model file to load',
+    )
 
     declare_robot_name_cmd = DeclareLaunchArgument(
         'robot_name', default_value='nav2_turtlebot3', description='name of the robot'

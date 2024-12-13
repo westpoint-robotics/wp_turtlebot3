@@ -21,5 +21,14 @@
 
 ## Running the simulation
 
-- To run the simulation run the command:  
-  `ros2 launch turtlebot3_sim simulation.launch.py`
+- To run just the simulation run the command:  
+  `ros2 launch turtlebot3_sim simulation.launch.py`  
+- To run SLAM run these two commands:  
+  `ros2 launch turtlebot3_sim simulation.launch.py`  
+  `ros2 launch turtlebot3_cartographer cartographer.launch.py`  
+- To run Nav2 in the Turtlbot3 World run these two commands:  
+  `ros2 launch turtlebot3_sim simulation.launch.py`  
+  `ros2 launch turtlebot3_navigation2 navigation2.launch.py`
+  - Then set the robot initial pose in rviz. In the simulation the robot is facing up and aligned with the left most obstacles. If no changes were made to RVIZ, the robot's initial pose should be facing to the right and aligned with the top row of obstacles.
+  - Navigate to waypoints using RVIZ
+  

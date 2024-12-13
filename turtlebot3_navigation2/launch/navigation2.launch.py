@@ -36,7 +36,9 @@ def generate_launch_description():
             'map',
             'map.yaml'))
 
-    param_file_name = TURTLEBOT3_MODEL + '.yaml'
+    #param_file_name = TURTLEBOT3_MODEL + '.yaml'
+    param_file_name = 'wp_nav2_params' + '.yaml'
+    
     param_dir = LaunchConfiguration(
         'params_file',
         default=os.path.join(
@@ -47,9 +49,9 @@ def generate_launch_description():
     nav2_launch_file_dir = os.path.join(get_package_share_directory('nav2_bringup'), 'launch')
 
     rviz_config_dir = os.path.join(
-        get_package_share_directory('nav2_bringup'),
+        get_package_share_directory('turtlebot3_navigation2'),
         'rviz',
-        'nav2_default_view.rviz')
+        'nav2.rviz')
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -79,7 +81,10 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            arguments=['-d', rviz_config_dir],
+            arguments=['-d', rviz_config_dir, '--ros-args', '--remap', 'rviz:__name:=r_viz', '--remap', 'lifecycle_manager_localization_service_client:__name:=lc_mgr_client'],
             parameters=[{'use_sim_time': use_sim_time}],
-            output='screen'),
+            output='screen')
+            
     ])
+
+

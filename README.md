@@ -7,6 +7,7 @@
 - Some short cuts were taken, for example moving of models, and other files to the modified turtlebot3_sim package.
 - This is a "WORK IN PROGRESS"
 
+### To run the WP Turtlebot3 in Simulation see the README in Trutlebot3_description package [here](turtlebot3_description/README.md#running-the-simulation)
 
 ***
 ***
