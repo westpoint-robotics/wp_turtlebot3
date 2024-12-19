@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.3.2 commit date:2024-12-16, commit time:21:10, hash:32f5fdce0a0a</authoring_tool>
+    </contributor>
+    <created>2024-12-18T19:56:54</created>
+    <modified>2024-12-18T19:56:54</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="smooth_concrete_floor-effect">
+      <profile_COMMON>
+        <newparam sid="smooth_concrete_floor_diff_png-surface">
+          <surface type="2D">
+            <init_from>smooth_concrete_floor_diff_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="smooth_concrete_floor_diff_png-sampler">
+          <sampler2D>
+            <source>smooth_concrete_floor_diff_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="smooth_concrete_floor_diff_png-sampler" texcoord="automap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="smooth_concrete_floor_diff_png" name="smooth_concrete_floor_diff_png">
+      <init_from>smooth_concrete_floor_diff.jpg</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="smooth_concrete_floor-material" name="smooth_concrete_floor">
+      <instance_effect url="#smooth_concrete_floor-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Plane_001-mesh" name="Plane.001">
+      <mesh>
+        <source id="Plane_001-mesh-positions">
+          <float_array id="Plane_001-mesh-positions-array" count="36">0 0 0 21.05 0 0 21.05 9.57 0 21.05 0 0.09999996 21.05 9.57 0.09999996 1.78 6.949999 0 0 6.949999 0 1.78 9.57 0 1.78 6.949999 0.00999999 1.78 9.57 0.00999999 0 6.949999 0.00999999 0 0 0.00999999</float_array>
+          <technique_common>
+            <accessor source="#Plane_001-mesh-positions-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane_001-mesh-normals">
+          <float_array id="Plane_001-mesh-normals-array" count="60">-1 0 0 1 0 0 0 1 -4.76837e-5 0 -1 0 0 0 1 0 1 0 0 0 -1 -1 0 0 -1 0 0 1 0 0 -2.67886e-7 1 0 0 -1 0 -0.004275441 0.001094996 0.9999903 -0.004670381 0 0.9999891 -0.004670381 0 0.9999891 0 1 0 0 0 -1 0 0 -1 0 0 -1 -1 0 -1.19209e-5</float_array>
+          <technique_common>
+            <accessor source="#Plane_001-mesh-normals-array" count="20" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane_001-mesh-map-0">
+          <float_array id="Plane_001-mesh-map-0-array" count="120">0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</float_array>
+          <technique_common>
+            <accessor source="#Plane_001-mesh-map-0-array" count="60" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Plane_001-mesh-map-1">
+          <float_array id="Plane_001-mesh-map-1-array" count="120">-2.231993 0.3907203 1.736105 0.3634003 -2.231993 0.3634003 3.231993 0.3634003 -2.231993 0.6365997 -2.231993 0.3634003 -2.231993 0.3634003 -1.769955 0.3907203 -1.769955 0.3634003 3.231993 0.3634003 -2.231993 0.3907203 -2.231993 0.3634003 -1.769955 1.736105 -2.231993 1.736105 -2.231993 -2.231993 -1.769955 0.3907203 3.231993 0.3634003 -1.769955 0.3634003 -1.769955 1.736105 3.231993 3.231993 3.231993 -2.231993 3.231993 0.3634003 1.736105 0.3907203 3.231993 0.3907203 -2.231993 0.3907203 1.736105 0.3907203 1.736105 0.3634003 3.231993 0.3634003 3.231993 0.6365997 -2.231993 0.6365997 -2.231993 0.3634003 -2.231993 0.3907203 -1.769955 0.3907203 3.231993 0.3634003 3.231993 0.6365997 -2.231993 0.3907203 -2.231993 -2.231993 3.231993 -2.231993 -1.769955 1.736105 3.231993 -2.231993 3.231993 3.231993 -1.769955 1.736105 3.231993 3.231993 -1.769955 3.231993 -1.769955 1.736105 -1.769955 0.3907203 3.231993 0.6365997 3.231993 0.3634003 3.231993 -2.231993 -2.231993 -2.231993 -1.769955 1.736105 -2.231993 -2.231993 -2.231993 1.736105 -1.769955 1.736105 -1.769955 1.736105 -1.769955 3.231993 3.231993 3.231993 3.231993 0.3634003 1.736105 0.3634003 1.736105 0.3907203</float_array>
+          <technique_common>
+            <accessor source="#Plane_001-mesh-map-1-array" count="60" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Plane_001-mesh-vertices">
+          <input semantic="POSITION" source="#Plane_001-mesh-positions"/>
+        </vertices>
+        <triangles material="smooth_concrete_floor-material" count="20">
+          <input semantic="VERTEX" source="#Plane_001-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Plane_001-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Plane_001-mesh-map-0" offset="2" set="0"/>
+          <input semantic="TEXCOORD" source="#Plane_001-mesh-map-1" offset="2" set="1"/>
+          <p>11 0 0 6 0 1 0 0 2 2 1 3 3 1 4 1 1 5 6 2 6 8 2 7 5 2 8 1 3 9 11 3 10 0 3 11 8 4 12 10 4 13 11 4 14 9 5 15 2 5 16 7 5 17 5 6 18 2 6 19 1 6 20 7 7 21 8 7 22 9 7 23 11 8 24 10 8 25 6 8 26 2 9 27 4 9 28 3 9 29 6 10 30 10 10 31 8 10 32 1 11 33 3 11 34 11 11 35 11 12 36 3 12 37 8 12 38 3 13 39 4 13 40 8 13 41 4 14 42 9 14 43 8 14 44 9 15 45 4 15 46 2 15 47 1 16 48 0 16 49 5 16 50 0 17 51 6 17 52 5 17 53 5 18 54 7 18 55 2 18 56 7 19 57 5 19 58 8 19 59</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Plane_001" name="Plane.001" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Plane_001-mesh" name="Plane.001">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="smooth_concrete_floor-material" target="#smooth_concrete_floor-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                <bind_vertex_input semantic="automap" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

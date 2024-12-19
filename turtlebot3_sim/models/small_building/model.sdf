@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+  <model name="small_building">
+    <pose>-10.5 -5.0 0 0 0 0</pose>
+    <static>true</static>
+
+    <link name="exterior_link">
+      <collision name="base">
+        <geometry>
+          <mesh>
+            <uri>model://small_building/meshes/Small_BuildingV3_exterior.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://small_building/meshes/Small_BuildingV3_exterior.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+
+    <!-- <link name="floor_link">
+      <pose>0 0 -0.04 0 0 0</pose>
+      <collision name="base">
+        <geometry>
+          <mesh>
+            <uri>model://small_building/meshes/Small_BuildingV3_floor.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://small_building/meshes/Small_BuildingV3_floor.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link> -->
+<!-- 
+    <link name="floor_plane">
+      <pose>0 0 0.2 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>21 9.57</size>
+          </plane>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>100 100</size>
+          </plane>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+          <specular>0.8 0.8 0.8 1</specular>
+        </material>
+      </visual>
+    </link> -->
+
+
+    <link name="interior_link">
+      <collision name="base">
+        <geometry>
+          <mesh>
+            <uri>model://small_building/meshes/Small_BuildingV3_interior.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://small_building/meshes/Small_BuildingV3_interior.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+
+  </model>
+</sdf>

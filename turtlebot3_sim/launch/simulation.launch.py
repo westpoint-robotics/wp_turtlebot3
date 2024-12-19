@@ -48,6 +48,7 @@ def generate_launch_description():
     print(f'\tmodels path: {os.path.join(sim_dir, 'models')}\n')
     #world_file_name = 'turtlebot3_house.world'
     world_file_name = 'turtlebot3_world.world'
+    world_file_name = 'xe484.world'
     world_path = os.path.join(sim_dir, 'worlds', world_file_name)
     # Create the launch configuration variables
     namespace = LaunchConfiguration('namespace')
@@ -227,7 +228,8 @@ def generate_launch_description():
         condition=IfCondition(use_joy),
         launch_arguments={'joy_config': joy_config,
                           'joy_dev': '0',
-                          'enable_button': '4'}.items())
+                          'enable_button': '4',
+                          'use_sim_time': use_sim_time}.items())
                           # enable_button not working above here
     
     gz_robot = IncludeLaunchDescription(

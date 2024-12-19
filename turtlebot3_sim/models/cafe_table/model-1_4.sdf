@@ -22,18 +22,15 @@
       </collision>
 
       <collision name="base">
-        <pose>0 0 0.02 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.56 0.56 0.04</size>
-          </box>
-        </geometry>
+          <mesh>
+            <uri>model://small_building/Small_Building.dae</uri>
+          </mesh>
       </collision>
 
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://cafe_table/meshes/cafe_table.dae</uri>
+            <uri>model://small_building/Small_Building.dae</uri>
           </mesh>
         </geometry>
       </visual>
