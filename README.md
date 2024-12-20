@@ -1,11 +1,13 @@
 # TurtleBot3 - Modified by WP Robotics
 
 ## West Point Robotics modifications were made to use this for course work
+
 - Modified to work with Ubuntu 24.04, ROS2 Jazzy, and Gazebo Harmonic 
 - Not all packages are updated and no gaurantee on if they will work.
 - Desired end-state was NAV2 working with Turtlebot3 in this environment.
 - Some short cuts were taken, for example moving of models, and other files to the modified turtlebot3_sim package.
-- This is a "WORK IN PROGRESS"
+- This is a "WORK IN PROGRESS" moderate your expectations accordingly.
+- Under the root of this repo is a file called OS_Setup.txt this file has a list of bash commands used to create a working environment for the code in this repo.
 
 ### To run the WP Turtlebot3 in Simulation see the README in Trutlebot3_description package [here](turtlebot3_description/README.md#running-the-simulation)
 

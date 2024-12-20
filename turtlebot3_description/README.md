@@ -8,7 +8,7 @@
   - <https://github.com/ros-navigation/nav2_minimal_turtlebot_simulation.git>
   - <https://github.com/ROBOTIS-GIT/turtlebot3.git>
 - Only the code mentioned below has been updated and tested
-- The following directories and there content have been added:
+- The following directories and there content that have been added include:
   - turtlebot3_description/configs
   - turtlebot3_description/hooks
   - turtlebot3_description/launch
@@ -18,6 +18,7 @@
   - turtlebot3_description/CMakeLists.txt
 - The following package was created by copying and modifying the tb4 equivalent in the nav2_minimal_turtlebot_simulation package
   - turtlebot3_sim
+- The above list is not all inclusive. Changes are being made continously as this is a work in progress.
 
 ## Running the simulation
 
