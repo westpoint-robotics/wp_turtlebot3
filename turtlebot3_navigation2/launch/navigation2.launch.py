@@ -30,11 +30,11 @@ TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     map_dir = LaunchConfiguration(
-        'map',
+        'map/small_building',
         default=os.path.join(
-            get_package_share_directory('turtlebot3_navigation2'),
-            'map',
-            'map.yaml'))
+            get_package_share_directory('turtlebot3_sim'),
+            'maps/small_building',
+            'my_map.yaml'))
 
     #param_file_name = TURTLEBOT3_MODEL + '.yaml'
     param_file_name = 'wp_nav2_params' + '.yaml'
@@ -66,7 +66,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
+            default_value='true',
             description='Use simulation (Gazebo) clock if true'),
 
         IncludeLaunchDescription(

@@ -39,6 +39,9 @@ def generate_launch_description():
     rviz_config_dir = os.path.join(get_package_share_directory('turtlebot3_cartographer'),
                                    'rviz', 'tb3_cartographer.rviz')
 
+    nav2_map_server_launch_dir = os.path.join(get_package_share_directory('nav2_map_server'), 'launch') 
+
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'cartographer_config_dir',
@@ -76,6 +79,12 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/occupancy_grid.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time, 'resolution': resolution,
                               'publish_period_sec': publish_period_sec}.items(),
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([nav2_map_server_launch_dir, '/map_saver_server.launch.py']),
+            launch_arguments={
+                'use_sim_time': use_sim_time}.items(),
         ),
 
         Node(

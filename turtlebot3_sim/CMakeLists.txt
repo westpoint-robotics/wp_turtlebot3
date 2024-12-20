@@ -5,7 +5,7 @@ project(turtlebot3_sim)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY configs launch worlds models
+  DIRECTORY configs launch worlds models maps
   DESTINATION share/${PROJECT_NAME}
 )
 

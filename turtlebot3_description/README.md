@@ -26,6 +26,8 @@
 - To run SLAM run these two commands:  
   `ros2 launch turtlebot3_sim simulation.launch.py`  
   `ros2 launch turtlebot3_cartographer cartographer.launch.py`  
+  - Cartographer launch has been modified to also run map server. To save a map use the command:
+    `ros2 service call /map_saver/save_map nav2_msgs/srv/SaveMap "{map_topic: map, map_url: my_map, image_format: pgm, map_mode: trinary, free_thresh: 0.25, occupied_thresh: 0.65}"`
 - To run Nav2 in the Turtlbot3 World run these two commands:  
   `ros2 launch turtlebot3_sim simulation.launch.py`  
   `ros2 launch turtlebot3_navigation2 navigation2.launch.py`
