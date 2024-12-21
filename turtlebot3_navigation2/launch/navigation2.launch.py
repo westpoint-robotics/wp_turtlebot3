@@ -29,6 +29,7 @@ TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
+    use_slam = LaunchConfiguration('use_slam', default='True')
     map_dir = LaunchConfiguration(
         'map/small_building',
         default=os.path.join(
@@ -68,12 +69,18 @@ def generate_launch_description():
             'use_sim_time',
             default_value='true',
             description='Use simulation (Gazebo) clock if true'),
+        
+        DeclareLaunchArgument(
+            'use_slam',
+            default_value='True',
+            description='Use SLAM'),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([nav2_launch_file_dir, '/bringup_launch.py']),
             launch_arguments={
                 'map': map_dir,
                 'use_sim_time': use_sim_time,
+                'slam': use_slam,
                 'params_file': param_dir}.items(),
         ),
 
