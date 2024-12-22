@@ -29,7 +29,8 @@ TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
-    use_slam = LaunchConfiguration('use_slam', default='True')
+    use_slam = LaunchConfiguration('use_slam', default='False')
+    use_localization = LaunchConfiguration('use_localization', default='True')
     map_dir = LaunchConfiguration(
         'map/small_building',
         default=os.path.join(
@@ -81,6 +82,7 @@ def generate_launch_description():
                 'map': map_dir,
                 'use_sim_time': use_sim_time,
                 'slam': use_slam,
+                'use_localization': use_localization,
                 'params_file': param_dir}.items(),
         ),
 
