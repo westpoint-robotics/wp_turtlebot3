@@ -25,6 +25,8 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import ThisLaunchFileDir
+from launch.conditions import IfCondition
+
 from launch_ros.actions import Node
 
 
@@ -41,6 +43,11 @@ def generate_launch_description():
             get_package_share_directory('turtlebot3_bringup'),
             'param',
             TURTLEBOT3_MODEL + '.yaml'))
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    joy_config = 'xbox'
+    use_joy = LaunchConfiguration('use_joy')
+
+
 
     if LDS_MODEL == 'LDS-01':
         lidar_pkg_dir = LaunchConfiguration(
@@ -59,6 +66,12 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+                'use_joy',
+                default_value='False',
+                description='Whether to start joystick control nodes',
+            ),
+
         DeclareLaunchArgument(
             'use_sim_time',
             default_value=use_sim_time,
@@ -84,6 +97,18 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([lidar_pkg_dir, LDS_LAUNCH_FILE]),
             launch_arguments={'port': '/dev/ttyUSB0', 'frame_id': 'base_scan'}.items(),
         ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('teleop_twist_joy'),
+                         'launch',
+                         'teleop-launch.py')
+            ),
+            condition=IfCondition(use_joy),
+            launch_arguments={'joy_config': joy_config,
+                          'joy_dev': '0',
+                          'enable_button': '4',
+                          'use_sim_time': use_sim_time}.items()),
+                          # enable_button not working above here
 
         Node(
             package='turtlebot3_node',
