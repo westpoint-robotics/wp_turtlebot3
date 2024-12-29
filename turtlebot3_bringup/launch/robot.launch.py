@@ -93,7 +93,7 @@ def generate_launch_description():
             launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
 
-        # TODO Align scan_link and base_scan between simulation and hardware
+        # TODO Align scan_link and base_scan between simulation and hardware.
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([lidar_pkg_dir, LDS_LAUNCH_FILE]),
             launch_arguments={'port': '/dev/ttyUSB0', 'frame_id': 'scan_link'}.items(),
