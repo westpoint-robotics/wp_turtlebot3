@@ -1,0 +1,33 @@
+IF NEEDED: To setup the wheel motors (Using a Ubuntu 24.04 laptop, some of this may not work on the ARM architecture)
+1. Used Arduino v1.8.19
+2. Set additional Boards Manager URLS to:
+	http://localhost/OpenCR/arduino/opencr_release/package_opencr_index.json
+3. Arduino | Tools | Board | Boards Manager installed OpenCR by Robotis version 1.52. NOTE: Version 1.53 is broken.
+4. As per: https://emanual.robotis.com/docs/en/platform/turtlebot3/faq/ section 14.3
+5. Connected to the OpenCR Board and Arduino | File | Examples | turtlebot3 | turtlebot3_setup | turtlebot3_setup_motor
+6. Unplugged Left motor only right motor is plugged in and sent the code to the OpenCR Board, selected option 2, and yes.
+7. Unplugged right motor and plugged in left motor and reset the OpenCR board, selected 1 and yes.
+8. Plugged in both motors reset the board then tested with options 3 and 4.
+9. Step test should pass before going forward.
+
+SETUP OpenCR with ROS2 code running, I followed the below instructions to push the turtlebot3 ROS2 code.
+Source: https://emanual.robotis.com/docs/en/platform/turtlebot3/opencr_setup/
+
+sudo dpkg --add-architecture armhf  
+sudo apt-get update  
+sudo apt-get install libc6:armhf  
+export OPENCR_PORT=/dev/ttyACM0  
+export OPENCR_MODEL=waffle 
+rm -rf ./opencr_update.tar.bz2
+wget https://github.com/ROBOTIS-GIT/OpenCR-Binaries/raw/master/turtlebot3/ROS2/latest/opencr_update.tar.bz2 
+tar -xvf opencr_update.tar.bz2
+cd ./opencr_update 
+./update.sh $OPENCR_PORT $OPENCR_MODEL.opencr
+
+Then tested by holding down SW2 on the OpenCR board for about 3 seconds. Both wheels drove
+
+Missing Dynamixel2Arduino.h
+So I did:
+https://github.com/ROBOTIS-GIT/Dynamixel2Arduino.git
+cd Dynamixel2Arduino/
+bash ./install.sh 
