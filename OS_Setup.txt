@@ -107,11 +107,6 @@ export GZ_SIM_RESOURCE_PATH=/home/${USER}/ros2_ws/install/turtlebot3_sim/share/t
 
 
 
-zgrep 'install ' /var/log/dpkg.log* | sort | cut -f4 -d' ' > ~/docker_ws/container_apt_installedA1.txt
-zgrep 'install ' /var/log/dpkg.log* | sort | cut -f4 -d' ' > ~/docker_ws/container_apt_installedA2.txt
-zgrep 'install ' /var/log/dpkg.log* | sort | cut -f4 -d' ' > ~/docker_ws/container_apt_installedA3.txt
-
-
 
 
 
