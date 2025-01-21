@@ -1,0 +1,44 @@
+sudo rpi-eeprom-config --edit
+and add this line to the bottom:
+PSU_MAX_CURRENT=5000
+
+od -A n -d -j 2 --endian=big /proc/device-tree/chosen/power/max_current
+
+
+
+
+commands
+user1@pi5tbot00:~$ od -A n -d -j 2 --endian=big /proc/device-tree/chosen/power/max_current
+  3000
+==============================
+user1@pi5tbot00:~$ vcgencmd get_throttled
+throttled=0x0
+user1@pi5tbot00:~$ vcgencmd pmic_read_adc
+ 3V7_WL_SW_A current(0)=0.00097593A
+   3V3_SYS_A current(1)=0.11613570A
+   1V8_SYS_A current(2)=0.16298030A
+  DDR_VDD2_A current(3)=0.11028010A
+  DDR_VDDQ_A current(4)=0.00980400A
+   1V1_SYS_A current(5)=0.40696280A
+    0V8_SW_A current(6)=0.51041140A
+  VDD_CORE_A current(7)=1.31271000A
+   3V3_DAC_A current(17)=0.00000000A
+   3V3_ADC_A current(18)=0.00000000A
+   0V8_AON_A current(16)=0.00433455A
+      HDMI_A current(22)=0.02356530A
+ 3V7_WL_SW_V volt(8)=3.72668700V
+   3V3_SYS_V volt(9)=3.31003300V
+   1V8_SYS_V volt(10)=1.80512600V
+  DDR_VDD2_V volt(11)=1.10732500V
+  DDR_VDDQ_V volt(12)=0.60036570V
+   1V1_SYS_V volt(13)=1.10219700V
+    0V8_SW_V volt(14)=0.79963290V
+  VDD_CORE_V volt(15)=0.72070740V
+   3V3_DAC_V volt(20)=3.31318300V
+   3V3_ADC_V volt(21)=3.31409900V
+   0V8_AON_V volt(19)=0.80087830V
+      HDMI_V volt(23)=5.00490000V
+     EXT5V_V volt(24)=4.99954000V
+      BATT_V volt(25)=0.00000000V
+
+https://forums.raspberrypi.com/viewtopic.php?t=357129
