@@ -27,7 +27,7 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
 sudo apt update && sudo apt install ros-dev-tools -y
-sudo apt update;sudo apt upgrade;sudo apt install ros-jazzy-desktop -y
+sudo apt update;sudo apt upgrade -y;sudo apt install ros-jazzy-desktop -y
 
 echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 source /opt/ros/jazzy/setup.bash
@@ -63,7 +63,6 @@ gz sim shapes.sdf
 # install ros gz ===================================
 sudo apt-get install ros-${ROS_DISTRO}-ros-gz
 
-
 # enable OpenCR hardware access ===================================
 wget https://raw.githubusercontent.com/ROBOTIS-GIT/OpenCR/master/99-opencr-cdc.rules
 sudo cp ./99-opencr-cdc.rules /etc/udev/rules.d/
@@ -80,10 +79,9 @@ mkdir -p ~/ros2_ws/src/
 cd ~/ros2_ws/src/
 git clone -b humble https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 git clone -b wp_jazzy_harmonic git@github.com:westpoint-robotics/wp_turtlebot3.git
-
-# These are some of the originals. Dont use these. I should have forked them and done pull requests.
-# git clone -b ros2 https://github.com/ROBOTIS-GIT/turtlebot3.git
-# git clone -b ros2 https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+git clone -b wp_jazzy https://github.com/westpoint-robotics/open_manipulator.git
+git clone -b humble https://github.com/ROBOTIS-GIT/dynamixel_hardware_interface.git
+git clone -b humble https://github.com/ROBOTIS-GIT/dynamixel_interfaces.git
 
 sudo rosdep init
 rosdep update
