@@ -453,4 +453,4 @@ loopback_simulator:
 
 loopback_simulator:
   ros__parameters:
-    max_laser_range = 3.5
+    max_laser_range: 3.5
