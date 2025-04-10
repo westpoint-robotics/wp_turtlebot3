@@ -32,14 +32,14 @@ TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
 def generate_launch_description():
     start_rviz = LaunchConfiguration('start_rviz')
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
-    use_slam = LaunchConfiguration('use_slam', default='False')
+    use_slam = LaunchConfiguration('slam', default='False')
     use_localization = LaunchConfiguration('use_localization', default='True')
     map_dir = LaunchConfiguration(
         'map/small_building',
         default=os.path.join(
             get_package_share_directory('turtlebot3_sim'),
             'maps/small_building',
-            'my_map.yaml'))
+            'ee484_maze_irl2.yaml'))
 
     #param_file_name = TURTLEBOT3_MODEL + '.yaml'
     param_file_name = 'wp_nav2_params' + '.yaml'

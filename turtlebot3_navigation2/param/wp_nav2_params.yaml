@@ -450,3 +450,7 @@ loopback_simulator:
     map_frame_id: "map"
     scan_frame_id: "scan_link"  # tb4_loopback_simulator.launch.py remaps to 'rplidar_link'
     update_duration: 0.02
+
+loopback_simulator:
+  ros__parameters:
+    max_laser_range = 3.5
