@@ -37,8 +37,8 @@ def generate_launch_description():
     map_dir = LaunchConfiguration(
         'map/small_building',
         default=os.path.join(
-            get_package_share_directory('turtlebot3_sim'),
-            'maps/small_building',
+            get_package_share_directory('turtlebot3_navigation2'),
+            'map/',
             'ee484_maze_irl2.yaml'))
 
     #param_file_name = TURTLEBOT3_MODEL + '.yaml'
