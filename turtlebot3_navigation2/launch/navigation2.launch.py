@@ -23,11 +23,14 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
+
 
 TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']
 
 
 def generate_launch_description():
+    start_rviz = LaunchConfiguration('start_rviz')
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     use_slam = LaunchConfiguration('use_slam', default='False')
     use_localization = LaunchConfiguration('use_localization', default='True')
@@ -56,6 +59,11 @@ def generate_launch_description():
         'nav2.rviz')
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'start_rviz',
+            default_value='True',
+            description='Whether execute rviz2'),
+
         DeclareLaunchArgument(
             'map',
             default_value=map_dir,
@@ -92,6 +100,7 @@ def generate_launch_description():
             name='rviz2',
             arguments=['-d', rviz_config_dir, '--ros-args', '--remap', 'rviz:__name:=r_viz', '--remap', 'lifecycle_manager_localization_service_client:__name:=lc_mgr_client'],
             parameters=[{'use_sim_time': use_sim_time}],
+            condition=IfCondition(start_rviz),
             output='screen')
             
     ])
