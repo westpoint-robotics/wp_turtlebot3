@@ -41,7 +41,6 @@ def generate_launch_description():
             'map/',
             'ee484_maze_irl2.yaml'))
 
-    #param_file_name = TURTLEBOT3_MODEL + '.yaml'
     param_file_name = 'wp_nav2_params' + '.yaml'
     
     param_dir = LaunchConfiguration(
@@ -90,7 +89,7 @@ def generate_launch_description():
                 'map': map_dir,
                 'use_sim_time': use_sim_time,
                 'slam': use_slam,
-                'use_localization': use_localization,
+                # 'use_localization': use_localization,
                 'params_file': param_dir}.items(),
         ),
 
